@@ -1,7 +1,7 @@
 import React from 'react';
-import { 
-  Box, Grid, Typography, Button, Container, Card, CardContent, 
-  CardMedia, CardActions, Divider, useTheme 
+import {
+  Box, Grid, Typography, Button, Container, Card, CardContent,
+  CardMedia, CardActions, Divider, useTheme
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
@@ -21,7 +21,6 @@ import { useProgress } from '../contexts/ProgressContext';
 const HeroSection = styled(Box)(({ theme }) => ({
   textAlign: 'center',
   padding: theme.spacing(10, 2),
-  backgroundImage: theme.palette.gradients.primary,
   borderRadius: theme.shape.borderRadius,
   color: theme.palette.primary.contrastText,
   marginBottom: theme.spacing(6),
@@ -72,7 +71,7 @@ const FeatureIcon = styled(Box)(({ theme }) => ({
 const HomePage = () => {
   const theme = useTheme();
   const { sections, getSectionCompletion, getOverallProgress } = useProgress();
-  
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -91,7 +90,7 @@ const HomePage = () => {
           >
             Understanding LGBTQAI+ Identities in India
           </Typography>
-          
+
           <Typography
             component={motion.p}
             variant="h5"
@@ -102,7 +101,7 @@ const HomePage = () => {
           >
             An educational journey to build awareness, empathy, and understanding of the LGBTQAI+ community in India
           </Typography>
-          
+
           <Box
             component={motion.div}
             initial={{ y: 50, opacity: 0 }}
@@ -122,14 +121,14 @@ const HomePage = () => {
           </Box>
         </Container>
       </HeroSection>
-      
+
       {/* Progress overview */}
       <Box sx={{ mb: 6 }}>
-        <SectionHeader 
-          title="Your Learning Progress" 
+        <SectionHeader
+          title="Your Learning Progress"
           subtitle="Track your educational journey through different aspects of LGBTQAI+ awareness."
         />
-        
+
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Card>
@@ -137,11 +136,11 @@ const HomePage = () => {
                 <Typography variant="h6" gutterBottom>
                   Overall Progress
                 </Typography>
-                <ProgressIndicator 
-                  label="Tutorial Completion" 
-                  value={getOverallProgress()} 
+                <ProgressIndicator
+                  label="Tutorial Completion"
+                  value={getOverallProgress()}
                 />
-                
+
                 <Box sx={{ mt: 4 }}>
                   <Typography variant="h6" gutterBottom>
                     Section Progress
@@ -149,9 +148,9 @@ const HomePage = () => {
                   <Grid container spacing={2}>
                     {sections.map((section) => (
                       <Grid item xs={12} sm={6} md={4} key={section.id}>
-                        <ProgressIndicator 
-                          label={section.title} 
-                          value={getSectionCompletion(section.id)} 
+                        <ProgressIndicator
+                          label={section.title}
+                          value={getSectionCompletion(section.id)}
                         />
                       </Grid>
                     ))}
@@ -159,8 +158,8 @@ const HomePage = () => {
                 </Box>
               </CardContent>
               <CardActions>
-                <Button 
-                  component={RouterLink} 
+                <Button
+                  component={RouterLink}
                   to="/introduction"
                   endIcon={<ArrowForwardIcon />}
                 >
@@ -171,14 +170,14 @@ const HomePage = () => {
           </Grid>
         </Grid>
       </Box>
-      
+
       {/* Features */}
       <Box sx={{ mb: 6 }}>
         <SectionHeader
           title="Learn Through Our Comprehensive Guide"
           subtitle="Our tutorial provides a multi-faceted approach to understanding LGBTQAI+ issues in India."
         />
-        
+
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
             <StatCard>
@@ -193,7 +192,7 @@ const HomePage = () => {
               </Typography>
             </StatCard>
           </Grid>
-          
+
           <Grid item xs={12} md={4}>
             <StatCard>
               <FeatureIcon>
@@ -207,7 +206,7 @@ const HomePage = () => {
               </Typography>
             </StatCard>
           </Grid>
-          
+
           <Grid item xs={12} md={4}>
             <StatCard>
               <FeatureIcon>
@@ -223,14 +222,14 @@ const HomePage = () => {
           </Grid>
         </Grid>
       </Box>
-      
+
       {/* Explore Sections */}
       <Box sx={{ mb: 6 }}>
         <SectionHeader
           title="Explore Tutorial Sections"
           subtitle="Dive into different aspects of LGBTQAI+ awareness through our structured learning modules."
         />
-        
+
         <Grid container spacing={3}>
           {sections.map((section, index) => (
             <Grid item xs={12} sm={6} md={4} key={section.id}>
@@ -239,19 +238,19 @@ const HomePage = () => {
                 description={`Learn about ${section.title.toLowerCase()} through ${section.subsections.length} interactive lessons.`}
                 progress={getSectionCompletion(section.id)}
                 image={`/src/assets/images/${section.id}.jpg`}
-                onClick={() => {/* Navigate to section */}}
+                onClick={() => {/* Navigate to section */ }}
                 badge={getSectionCompletion(section.id) === 100 ? "Completed" : null}
               />
             </Grid>
           ))}
         </Grid>
       </Box>
-      
+
       {/* Call to Action */}
-      <Box 
-        sx={{ 
-          py: 8, 
-          px: 4, 
+      <Box
+        sx={{
+          py: 8,
+          px: 4,
           textAlign: 'center',
           background: theme.palette.background.gradient,
           borderRadius: theme.shape.borderRadius,
@@ -263,7 +262,7 @@ const HomePage = () => {
             Start Your Journey Towards Understanding
           </Typography>
           <Typography variant="body1" sx={{ mb: 4, maxWidth: '800px', mx: 'auto' }}>
-            Education is the first step towards creating an inclusive society where everyone can live with dignity and respect. 
+            Education is the first step towards creating an inclusive society where everyone can live with dignity and respect.
             Begin your learning journey today and become an ally for the LGBTQAI+ community.
           </Typography>
           <RainbowButton

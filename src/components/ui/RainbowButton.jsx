@@ -6,7 +6,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
   position: 'relative',
   overflow: 'hidden',
   zIndex: 1,
-  
+
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -14,12 +14,11 @@ const StyledButton = styled(Button)(({ theme }) => ({
     left: 0,
     right: 0,
     bottom: 0,
-    background: theme.palette.gradients.rainbow,
     opacity: 0,
     zIndex: -1,
     transition: 'opacity 0.3s ease',
   },
-  
+
   '&:hover::before': {
     opacity: 1,
   },

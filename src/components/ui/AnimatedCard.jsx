@@ -41,7 +41,6 @@ const ProgressBar = styled(Box)(({ theme, progress }) => ({
   left: 0,
   height: 4,
   width: `${progress}%`,
-  background: theme.palette.gradients.rainbow,
   transition: 'width 0.5s ease-in-out',
 }));
 
@@ -75,20 +74,20 @@ const AnimatedCard = ({
       transition={{ type: 'spring', stiffness: 300 }}
       {...props}
     >
-      <CardActionArea 
+      <CardActionArea
         onClick={onClick}
         disabled={locked}
         sx={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
       >
         {badge && <CardBadge status={completed ? 'completed' : locked ? 'locked' : null}>{badge}</CardBadge>}
-        
+
         <Box sx={{ position: 'relative' }}>
           <CardOverlay locked={locked}>
             <Typography variant="body1" color="white" fontWeight={600}>
               Complete previous sections to unlock
             </Typography>
           </CardOverlay>
-          
+
           {image && (
             <CardMedia
               component="img"
@@ -98,10 +97,10 @@ const AnimatedCard = ({
               sx={{ filter: locked ? 'grayscale(100%)' : 'none' }}
             />
           )}
-          
+
           <ProgressBar progress={progress} />
         </Box>
-        
+
         <CardContent sx={{ flexGrow: 1 }}>
           <Typography gutterBottom variant="h5" component="div">
             {title}

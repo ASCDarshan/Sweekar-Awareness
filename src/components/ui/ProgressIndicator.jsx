@@ -12,7 +12,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   '& .MuiLinearProgress-bar': {
     borderRadius: 5,
-    backgroundImage: theme.palette.gradients.rainbow,
+    backgroundImage: theme.rainbowTheme.gradients?.rainbow,
   },
 }));
 

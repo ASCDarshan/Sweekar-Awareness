@@ -19,7 +19,6 @@ const Title = styled(motion(Typography))(({ theme }) => ({
     height: '4px',
     bottom: '-8px',
     left: '25%',
-    background: theme.palette.gradients.rainbow,
     borderRadius: '2px',
   },
 }));
@@ -61,7 +60,7 @@ const SectionHeader = ({ title, subtitle, align = 'center', ...props }) => {
       >
         {title}
       </Title>
-      
+
       {subtitle && (
         <Subtitle
           variant="body1"

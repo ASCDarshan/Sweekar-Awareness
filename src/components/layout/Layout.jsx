@@ -12,8 +12,13 @@ const Main = styled(Box)(({ theme }) => ({
 
 const ContentWrapper = styled(Box)(({ theme }) => ({
   flexGrow: 1,
-  paddingTop: theme.spacing(4),
-  paddingBottom: theme.spacing(6),
+  padding: theme.spacing(4, 2, 6), // Adds horizontal padding for small screens
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(4, 3, 6),
+  },
+  [theme.breakpoints.up('md')]: {
+    padding: theme.spacing(4, 4, 6),
+  },
 }));
 
 const Layout = ({ children, maxWidth = 'lg' }) => {
@@ -21,7 +26,7 @@ const Layout = ({ children, maxWidth = 'lg' }) => {
     <Main>
       <Header />
       <ContentWrapper>
-        <Container maxWidth={maxWidth}>
+        <Container maxWidth={maxWidth} sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
           {children}
         </Container>
       </ContentWrapper>
