@@ -1,6 +1,5 @@
 import React from 'react';
-import { Container, Typography, Box, Grid, Card, CardContent, useTheme } from '@mui/material';
-import { motion } from 'framer-motion';
+import { Typography, Box, Grid, Card, CardContent, useTheme } from '@mui/material';
 
 import SectionHeader from '../components/ui/SectionHeader';
 import ProfileCompletion from '../components/tutorial/ProfileCompletion';
@@ -9,7 +8,7 @@ import { useProgress } from '../contexts/ProgressContext';
 const ProgressPage = () => {
   const theme = useTheme();
   const { sections, getOverallProgress, getSectionCompletion } = useProgress();
-  
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -20,23 +19,23 @@ const ProgressPage = () => {
         title="Your Learning Journey"
         subtitle="Track your progress and achievements in the LGBTQAI+ awareness tutorial"
       />
-      
+
       <ProfileCompletion />
-      
+
       <Box sx={{ my: 6 }}>
         <Typography variant="h5" gutterBottom>
           Learning Path Overview
         </Typography>
         <Typography variant="body1" paragraph>
-          Our tutorial is structured to provide a comprehensive understanding of LGBTQAI+ issues in India. 
+          Our tutorial is structured to provide a comprehensive understanding of LGBTQAI+ issues in India.
           Below is an overview of each section and what you'll learn.
         </Typography>
-        
+
         <Grid container spacing={3} sx={{ mt: 2 }}>
           {sections.map((section, index) => (
             <Grid item xs={12} md={6} key={section.id}>
-              <Card 
-                sx={{ 
+              <Card
+                sx={{
                   height: '100%',
                   borderLeft: `4px solid ${theme.palette.primary.main}`,
                   transition: 'transform 0.2s ease',
@@ -48,8 +47,8 @@ const ProgressPage = () => {
                 <CardContent>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                     <Typography variant="h6">{index + 1}. {section.title}</Typography>
-                    <Typography 
-                      variant="subtitle2" 
+                    <Typography
+                      variant="subtitle2"
                       color={getSectionCompletion(section.id) === 100 ? 'tertiary.main' : 'text.secondary'}
                     >
                       {Math.round(getSectionCompletion(section.id))}% Complete
@@ -64,7 +63,7 @@ const ProgressPage = () => {
           ))}
         </Grid>
       </Box>
-      
+
       <Box sx={{ mt: 6, mb: 4, textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom>
           Continue Your Learning Journey
@@ -80,7 +79,7 @@ const ProgressPage = () => {
 
 // Helper function to generate descriptions based on section ID
 const getSubsectionDescription = (section) => {
-  switch(section.id) {
+  switch (section.id) {
     case 'introduction':
       return 'Get familiar with the tutorial structure and understand the learning objectives.';
     case 'historical':

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { 
-  AppBar, Toolbar, Typography, Box, IconButton, Button, 
+import {
+  AppBar, Toolbar, Typography, Box, IconButton, Button,
   Drawer, List, ListItem, ListItemIcon, ListItemText,
   useMediaQuery, useTheme, Avatar, LinearProgress
 } from '@mui/material';
@@ -26,7 +26,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 
 const Logo = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
-  background: theme.palette.gradients.rainbow,
+  background: theme.rainbowTheme.gradients?.rainbow,
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   marginRight: theme.spacing(2),
@@ -47,7 +47,7 @@ const NavButton = styled(Button)(({ theme, active }) => ({
     left: '20%',
     width: '60%',
     height: '3px',
-    background: theme.palette.gradients.rainbow,
+    background: theme.rainbowTheme.gradients?.rainbow,
     borderRadius: '4px',
   } : {},
 }));
@@ -55,7 +55,7 @@ const NavButton = styled(Button)(({ theme, active }) => ({
 const ProgressIndicator = styled(LinearProgress)(({ theme }) => ({
   height: 4,
   '& .MuiLinearProgress-bar': {
-    background: theme.palette.gradients.rainbow,
+    background: theme.rainbowTheme.gradients?.rainbow,
   },
 }));
 
@@ -76,9 +76,9 @@ const Header = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const location = useLocation();
   const { getOverallProgress } = useProgress();
-  
+
   const progress = getOverallProgress();
-  
+
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === 'keydown' &&
@@ -88,13 +88,13 @@ const Header = () => {
     }
     setDrawerOpen(open);
   };
-  
+
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
-  
+
   // Mobile drawer content
   const drawerContent = (
     <Box
@@ -109,11 +109,11 @@ const Header = () => {
           <CloseIcon />
         </IconButton>
       </Box>
-      
+
       <List>
         {navigationItems.map((item) => (
-          <ListItem 
-            button 
+          <ListItem
+            button
             key={item.text}
             component={RouterLink}
             to={item.path}
@@ -124,15 +124,15 @@ const Header = () => {
               pl: isActive(item.path) ? 2 : 3,
             }}
           >
-            <ListItemIcon sx={{ 
+            <ListItemIcon sx={{
               color: isActive(item.path) ? 'primary.main' : 'text.secondary',
               minWidth: 40,
             }}>
               {item.icon}
             </ListItemIcon>
-            <ListItemText 
-              primary={item.text} 
-              sx={{ 
+            <ListItemText
+              primary={item.text}
+              sx={{
                 color: isActive(item.path) ? 'primary.main' : 'text.primary',
                 '& .MuiListItemText-primary': {
                   fontWeight: isActive(item.path) ? 600 : 400,
@@ -144,7 +144,7 @@ const Header = () => {
       </List>
     </Box>
   );
-  
+
   return (
     <>
       <StyledAppBar position="sticky">
@@ -153,12 +153,12 @@ const Header = () => {
           <Logo variant="h6" component={RouterLink} to="/" sx={{ textDecoration: 'none' }}>
             LGBTQAI+ Awareness
           </Logo>
-          
+
           {/* Desktop Navigation */}
           {!isMobile && (
             <Box sx={{ display: 'flex', flexGrow: 1 }}>
               {navigationItems.map((item) => (
-                <NavButton 
+                <NavButton
                   key={item.text}
                   component={RouterLink}
                   to={item.path}
@@ -170,17 +170,17 @@ const Header = () => {
               ))}
             </Box>
           )}
-          
+
           {/* Right side content - progress indicator */}
           <Box sx={{ display: 'flex', alignItems: 'center', ml: 'auto' }}>
             <Typography variant="body2" color="text.secondary" sx={{ mr: 1 }}>
               {Math.round(progress)}% Complete
             </Typography>
-            <Avatar 
-              sx={{ 
-                width: 40, 
-                height: 40, 
-                background: progress >= 100 ? theme.palette.gradients.rainbow : theme.palette.background.card,
+            <Avatar
+              sx={{
+                width: 40,
+                height: 40,
+                background: progress >= 100 ? theme.rainbowTheme.gradients?.rainbow : theme.palette.background.card,
                 color: theme.palette.text.primary,
                 border: `2px solid ${theme.palette.background.paper}`,
                 boxShadow: theme.shadows[1],
@@ -188,7 +188,7 @@ const Header = () => {
             >
               {Math.round(progress)}%
             </Avatar>
-            
+
             {/* Mobile Menu Button */}
             {isMobile && (
               <IconButton
@@ -205,7 +205,7 @@ const Header = () => {
         </Toolbar>
         <ProgressIndicator variant="determinate" value={progress} />
       </StyledAppBar>
-      
+
       {/* Mobile Navigation Drawer */}
       <Drawer
         anchor="right"

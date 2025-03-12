@@ -1,12 +1,11 @@
 // In your HistoricalPage.jsx
 import React from 'react';
-import { 
+import {
   Typography, Box, Card, CardContent
 } from '@mui/material';
-// Import Timeline components from MUI Lab instead of MUI core
 import {
-  Timeline, TimelineItem, TimelineSeparator, 
-  TimelineConnector, TimelineContent, TimelineDot, 
+  Timeline, TimelineItem, TimelineSeparator,
+  TimelineConnector, TimelineContent, TimelineDot,
   TimelineOppositeContent
 } from '@mui/lab';
 import { useParams, Navigate } from 'react-router-dom';
@@ -15,7 +14,6 @@ import { styled } from '@mui/material/styles';
 import SectionTemplate from '../components/sections/SectionTemplate';
 import { historicalData } from '../data';
 
-// Styled components
 const TimelinePaper = styled(Card)(({ theme }) => ({
   padding: theme.spacing(3),
   marginBottom: theme.spacing(4),
@@ -28,13 +26,12 @@ const PeriodCard = styled(Card)(({ theme }) => ({
 
 const PeriodHeader = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
-  background: theme.palette.gradients.primary,
+  background: theme.palette.gradients?.primary,
   color: theme.palette.primary.contrastText,
   borderTopLeftRadius: theme.shape.borderRadius,
   borderTopRightRadius: theme.shape.borderRadius,
 }));
 
-// Subsections mapping
 const subsections = [
   { id: 'ancient', title: 'Ancient India', path: '/history/ancient', description: 'Gender and sexual diversity in ancient Indian history' },
   { id: 'colonial', title: 'Colonial Era', path: '/history/colonial', description: 'The impact of British colonialism on LGBTQAI+ rights' },
@@ -44,15 +41,12 @@ const subsections = [
 
 const HistoricalPage = () => {
   const { subsectionId } = useParams();
-  
-  // If no subsection specified, redirect to the first one
-  if (!subsectionId) {
-    return <Navigate to="/history/ancient" replace />;
-  }
-  
+
+
+
   // Find subsection data
   const activePeriod = historicalData.periods.find(period => period.id === subsectionId);
-  
+
   // Render content based on subsection
   const renderContent = () => {
     if (subsectionId === 'timeline') {
@@ -85,7 +79,7 @@ const HistoricalPage = () => {
         </TimelinePaper>
       );
     }
-    
+
     if (activePeriod) {
       return (
         <PeriodCard>
@@ -96,11 +90,11 @@ const HistoricalPage = () => {
             <Typography variant="body1" paragraph>
               {activePeriod.description}
             </Typography>
-            
+
             <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
               Key Points
             </Typography>
-            
+
             {activePeriod.keyPoints.map((point, index) => (
               <Box key={index} sx={{ mb: 2 }}>
                 <Typography variant="body1">
@@ -115,7 +109,7 @@ const HistoricalPage = () => {
         </PeriodCard>
       );
     }
-    
+
     return (
       <Box>
         <Typography variant="h5" color="error">
@@ -124,7 +118,7 @@ const HistoricalPage = () => {
       </Box>
     );
   };
-  
+
   return (
     <SectionTemplate
       sectionId="historical"

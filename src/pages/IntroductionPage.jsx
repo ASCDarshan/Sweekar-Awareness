@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { 
-  Box, Typography, Paper, Grid, Card, CardContent, 
-  Button, Divider, useTheme, List, ListItem, ListItemIcon, ListItemText 
+import {
+  Box, Typography, Paper, Grid, Card, CardContent,
+  Button, Divider, List, ListItem, ListItemIcon, ListItemText
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
@@ -22,7 +22,7 @@ const ContentPaper = styled(Paper)(({ theme }) => ({
 const Rainbow = styled(Box)(({ theme }) => ({
   height: 6,
   width: '100%',
-  background: theme.palette.gradients.rainbow,
+  background: theme.rainbowTheme.gradients?.rainbow,
   borderRadius: 3,
   marginBottom: theme.spacing(3),
 }));
@@ -37,24 +37,23 @@ const LearningObjectiveCard = styled(Card)(({ theme }) => ({
 }));
 
 const IntroductionPage = () => {
-  const theme = useTheme();
   const { markAsCompleted } = useProgress();
-  
+
   // Mark introduction as completed when the page is visited
   useEffect(() => {
     markAsCompleted('introduction', 'welcome');
-    
+
     // Simulate automatic completion of overview when the user scrolls to the bottom
     const handleScroll = () => {
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
         markAsCompleted('introduction', 'overview');
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [markAsCompleted]);
-  
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -65,7 +64,7 @@ const IntroductionPage = () => {
         title="Welcome to the LGBTQAI+ Awareness Tutorial"
         subtitle="An educational journey to understand and support the LGBTQAI+ community in India"
       />
-      
+
       <ContentPaper elevation={1}>
         <Rainbow />
         <Typography variant="h4" gutterBottom>
@@ -81,12 +80,12 @@ const IntroductionPage = () => {
           The content is organized into several sections, each focusing on different aspects of LGBTQAI+ awareness. You can progress through them sequentially or jump to specific topics of interest. Your progress will be tracked, allowing you to continue where you left off.
         </Typography>
       </ContentPaper>
-      
+
       <SectionHeader
         title="Learning Objectives"
         subtitle="By completing this tutorial, you will:"
       />
-      
+
       <Grid container spacing={3} sx={{ mb: 6 }}>
         <Grid item xs={12} sm={6} md={4}>
           <LearningObjectiveCard>
@@ -100,7 +99,7 @@ const IntroductionPage = () => {
             </CardContent>
           </LearningObjectiveCard>
         </Grid>
-        
+
         <Grid item xs={12} sm={6} md={4}>
           <LearningObjectiveCard>
             <CardContent>
@@ -113,7 +112,7 @@ const IntroductionPage = () => {
             </CardContent>
           </LearningObjectiveCard>
         </Grid>
-        
+
         <Grid item xs={12} sm={6} md={4}>
           <LearningObjectiveCard>
             <CardContent>
@@ -126,7 +125,7 @@ const IntroductionPage = () => {
             </CardContent>
           </LearningObjectiveCard>
         </Grid>
-        
+
         <Grid item xs={12} sm={6} md={4}>
           <LearningObjectiveCard>
             <CardContent>
@@ -139,7 +138,7 @@ const IntroductionPage = () => {
             </CardContent>
           </LearningObjectiveCard>
         </Grid>
-        
+
         <Grid item xs={12} sm={6} md={4}>
           <LearningObjectiveCard>
             <CardContent>
@@ -152,7 +151,7 @@ const IntroductionPage = () => {
             </CardContent>
           </LearningObjectiveCard>
         </Grid>
-        
+
         <Grid item xs={12} sm={6} md={4}>
           <LearningObjectiveCard>
             <CardContent>
@@ -166,7 +165,7 @@ const IntroductionPage = () => {
           </LearningObjectiveCard>
         </Grid>
       </Grid>
-      
+
       <ContentPaper elevation={1}>
         <Typography variant="h4" gutterBottom>
           How to Use This Tutorial
@@ -176,8 +175,8 @@ const IntroductionPage = () => {
             <ListItemIcon>
               <CheckCircleOutlineIcon color="primary" />
             </ListItemIcon>
-            <ListItemText 
-              primary="Navigate through sections" 
+            <ListItemText
+              primary="Navigate through sections"
               secondary="Use the navigation menu to move between different topics or follow the suggested sequence."
             />
           </ListItem>
@@ -185,8 +184,8 @@ const IntroductionPage = () => {
             <ListItemIcon>
               <CheckCircleOutlineIcon color="primary" />
             </ListItemIcon>
-            <ListItemText 
-              primary="Track your progress" 
+            <ListItemText
+              primary="Track your progress"
               secondary="The app automatically tracks which sections you've completed."
             />
           </ListItem>
@@ -194,8 +193,8 @@ const IntroductionPage = () => {
             <ListItemIcon>
               <CheckCircleOutlineIcon color="primary" />
             </ListItemIcon>
-            <ListItemText 
-              primary="Take your time" 
+            <ListItemText
+              primary="Take your time"
               secondary="There's no rush - learn at your own pace and revisit sections as needed."
             />
           </ListItem>
@@ -203,8 +202,8 @@ const IntroductionPage = () => {
             <ListItemIcon>
               <CheckCircleOutlineIcon color="primary" />
             </ListItemIcon>
-            <ListItemText 
-              primary="Reflect on the content" 
+            <ListItemText
+              primary="Reflect on the content"
               secondary="Take time to think about what you've learned and how it might apply to your life or community."
             />
           </ListItem>
@@ -212,14 +211,14 @@ const IntroductionPage = () => {
             <ListItemIcon>
               <CheckCircleOutlineIcon color="primary" />
             </ListItemIcon>
-            <ListItemText 
-              primary="Explore resources" 
+            <ListItemText
+              primary="Explore resources"
               secondary="Check out the resources section for additional support and information."
             />
           </ListItem>
         </List>
       </ContentPaper>
-      
+
       <Box sx={{ textAlign: 'center', mt: 4, mb: 8 }}>
         <Typography variant="h5" gutterBottom>
           Ready to start your learning journey?
