@@ -2,8 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardMedia, CardActionArea, Typography, Box, styled } from '@mui/material';
 import { motion } from 'framer-motion';
 
-// Motion Card component
-const MotionCard = styled(motion(Card))(({ theme }) => ({
+const MotionCard = styled(motion(Card))(() => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -14,7 +13,6 @@ const MotionCard = styled(motion(Card))(({ theme }) => ({
   },
 }));
 
-// CardBadge component for completed or locked status
 const CardBadge = styled(Box)(({ theme, status }) => ({
   position: 'absolute',
   top: 16,
@@ -34,8 +32,7 @@ const CardBadge = styled(Box)(({ theme, status }) => ({
   }),
 }));
 
-// Progress indicator at the bottom of the card
-const ProgressBar = styled(Box)(({ theme, progress }) => ({
+const ProgressBar = styled(Box)(({ progress }) => ({
   position: 'absolute',
   bottom: 0,
   left: 0,
@@ -44,7 +41,7 @@ const ProgressBar = styled(Box)(({ theme, progress }) => ({
   transition: 'width 0.5s ease-in-out',
 }));
 
-const CardOverlay = styled(Box)(({ theme, locked }) => ({
+const CardOverlay = styled(Box)(({ locked }) => ({
   position: 'absolute',
   top: 0,
   left: 0,

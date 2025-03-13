@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { 
-  Box, Typography, Paper, Button, Divider, 
-  Grid, Card, CardContent, useTheme
+import {
+  Box, Typography, Paper, Button, Divider,
+  Grid, Card, CardContent,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
@@ -52,19 +52,16 @@ const SectionTemplate = ({
   nextLink,
   children,
 }) => {
-  const theme = useTheme();
-  const { markAsCompleted, getSectionCompletion } = useProgress();
-  
-  // Mark current subsection as completed
-  useEffect(() => {
-    if (activeSubsection) {
-      markAsCompleted(sectionId, activeSubsection);
-    }
-  }, [sectionId, activeSubsection, markAsCompleted]);
-  
-  // Calculate progress
-  const progress = getSectionCompletion(sectionId);
-  
+  // const { markAsCompleted, getSectionCompletion } = useProgress();
+
+  // useEffect(() => {
+  //   if (activeSubsection) {
+  //     markAsCompleted(sectionId, activeSubsection);
+  //   }
+  // }, [sectionId, activeSubsection, markAsCompleted]);
+
+  // const progress = getSectionCompletion(sectionId);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -75,9 +72,8 @@ const SectionTemplate = ({
         title={title}
         subtitle={subtitle}
       />
-      
+
       <Grid container spacing={4}>
-        {/* Main content area */}
         <Grid item xs={12} md={8}>
           {introduction && (
             <ContentPaper>
@@ -90,11 +86,9 @@ const SectionTemplate = ({
               {introduction.additionalContent && introduction.additionalContent}
             </ContentPaper>
           )}
-          
-          {/* Main content goes here */}
+
           {children}
-          
-          {/* Navigation buttons */}
+
           <NavigationButtons>
             {prevLink && (
               <Button
@@ -106,9 +100,9 @@ const SectionTemplate = ({
                 {prevLink.label || 'Previous'}
               </Button>
             )}
-            
+
             <Box sx={{ flexGrow: 1 }} />
-            
+
             {nextLink && (
               <Button
                 component={RouterLink}
@@ -122,28 +116,27 @@ const SectionTemplate = ({
             )}
           </NavigationButtons>
         </Grid>
-        
-        {/* Sidebar with navigation */}
+
         <Grid item xs={12} md={4}>
           <Card sx={{ position: 'sticky', top: '100px' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Section Progress
               </Typography>
-              
-              <ProgressIndicator 
-                label={title} 
-                value={progress} 
+
+              <ProgressIndicator
+                label={title}
+                value={25}
               />
-              
+
               <Divider sx={{ my: 2 }} />
-              
+
               <Typography variant="subtitle1" gutterBottom>
                 In This Section
               </Typography>
-              
+
               {subsections.map((subsection) => (
-                <SubsectionCard 
+                <SubsectionCard
                   key={subsection.id}
                   active={activeSubsection === subsection.id}
                   component={RouterLink}

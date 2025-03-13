@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button, styled } from '@mui/material';
 
-// Custom styled button with rainbow gradient on hover
-const StyledButton = styled(Button)(({ theme }) => ({
+const StyledButton = styled(Button)(() => ({
   position: 'relative',
   overflow: 'hidden',
   zIndex: 1,

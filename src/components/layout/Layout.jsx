@@ -12,7 +12,7 @@ const Main = styled(Box)(({ theme }) => ({
 
 const ContentWrapper = styled(Box)(({ theme }) => ({
   flexGrow: 1,
-  padding: theme.spacing(4, 2, 6), // Adds horizontal padding for small screens
+  padding: theme.spacing(4, 2, 6),
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(4, 3, 6),
   },

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Box, Typography, Card, CardContent, IconButton, 
+import {
+  Box, Typography, Card, CardContent, IconButton,
   useTheme, useMediaQuery, Button, Tooltip
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -96,44 +96,39 @@ const InteractiveTimeline = ({ events, defaultActiveIndex = 0 }) => {
   const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
   const [visibleMarkers, setVisibleMarkers] = useState([]);
   const containerRef = useRef(null);
-  
+
   const activeEvent = events[activeIndex];
-  
-  // Calculate which markers should be visible based on screen size
+
   useEffect(() => {
     if (!containerRef.current) return;
-    
-    const containerWidth = containerRef.current.offsetWidth;
+
     const markersToShow = isSmallScreen ? 5 : 7;
-    
-    // Center around active marker
+
     const halfMarkersToShow = Math.floor(markersToShow / 2);
     let start = Math.max(0, activeIndex - halfMarkersToShow);
     let end = Math.min(events.length, start + markersToShow);
-    
-    // Adjust start if end is capped
+
     if (end === events.length) {
       start = Math.max(0, end - markersToShow);
     }
-    
+
     setVisibleMarkers(events.slice(start, end));
   }, [activeIndex, events, isSmallScreen]);
-  
+
   const handleNext = () => {
     if (activeIndex < events.length - 1) {
       setActiveIndex(activeIndex + 1);
     }
   };
-  
+
   const handlePrev = () => {
     if (activeIndex > 0) {
       setActiveIndex(activeIndex - 1);
     }
   };
-  
+
   return (
     <TimelineContainer ref={containerRef}>
-      {/* Event Card */}
       <CarouselContainer>
         <AnimatePresence mode="wait">
           <EventCard
@@ -157,10 +152,8 @@ const InteractiveTimeline = ({ events, defaultActiveIndex = 0 }) => {
           </EventCard>
         </AnimatePresence>
       </CarouselContainer>
-      
-      {/* Timeline Track */}
+
       <TimelineTrack>
-        {/* Navigation Buttons */}
         <NavigationButton
           onClick={handlePrev}
           disabled={activeIndex === 0}
@@ -169,7 +162,7 @@ const InteractiveTimeline = ({ events, defaultActiveIndex = 0 }) => {
         >
           <ArrowBackIosNewIcon fontSize="small" />
         </NavigationButton>
-        
+
         <NavigationButton
           onClick={handleNext}
           disabled={activeIndex === events.length - 1}
@@ -178,8 +171,7 @@ const InteractiveTimeline = ({ events, defaultActiveIndex = 0 }) => {
         >
           <ArrowForwardIosIcon fontSize="small" />
         </NavigationButton>
-        
-        {/* Active progress indicator */}
+
         <Box
           sx={{
             position: 'absolute',
@@ -192,13 +184,12 @@ const InteractiveTimeline = ({ events, defaultActiveIndex = 0 }) => {
             transition: 'width 0.3s ease',
           }}
         />
-        
-        {/* Timeline markers */}
+
         {visibleMarkers.map((event, index) => {
           const eventIndex = events.findIndex(e => e.year === event.year);
           const position = (index / (visibleMarkers.length - 1)) * 100;
           const isActive = eventIndex === activeIndex;
-          
+
           return (
             <Tooltip key={event.year} title={event.event} arrow>
               <Box>
@@ -219,8 +210,7 @@ const InteractiveTimeline = ({ events, defaultActiveIndex = 0 }) => {
           );
         })}
       </TimelineTrack>
-      
-      {/* Navigation text */}
+
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 5 }}>
         <Button
           size="small"

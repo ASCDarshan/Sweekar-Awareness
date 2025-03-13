@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Box, Typography, Paper, Grid, Card, CardContent,
   Button, Divider, List, ListItem, ListItemIcon, ListItemText
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 import SectionHeader from '../components/ui/SectionHeader';
-import { useProgress } from '../contexts/ProgressContext';
 
 const ContentPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
@@ -37,22 +36,7 @@ const LearningObjectiveCard = styled(Card)(({ theme }) => ({
 }));
 
 const IntroductionPage = () => {
-  const { markAsCompleted } = useProgress();
-
-  // Mark introduction as completed when the page is visited
-  useEffect(() => {
-    markAsCompleted('introduction', 'welcome');
-
-    // Simulate automatic completion of overview when the user scrolls to the bottom
-    const handleScroll = () => {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
-        markAsCompleted('introduction', 'overview');
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [markAsCompleted]);
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -224,8 +208,7 @@ const IntroductionPage = () => {
           Ready to start your learning journey?
         </Typography>
         <Button
-          component={RouterLink}
-          to="/history"
+          onClick={() => navigate("/history")}
           variant="contained"
           color="primary"
           size="large"

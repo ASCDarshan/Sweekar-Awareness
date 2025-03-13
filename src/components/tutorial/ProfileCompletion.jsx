@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { 
-  Box, Typography, Card, CardContent, Grid, 
-  Divider, Button, Avatar, CircularProgress, 
-  useTheme, IconButton, Dialog, DialogTitle, 
+import {
+  Box, Typography, Card, CardContent, Grid,
+  Divider, Button, Avatar, CircularProgress,
+  useTheme, IconButton, Dialog, DialogTitle,
   DialogContent, DialogActions
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -89,71 +89,72 @@ const BadgeIcon = styled(Box)(({ theme, unlocked }) => ({
   marginBottom: theme.spacing(1),
 }));
 
+const badges = [
+  {
+    id: 'started',
+    name: 'First Steps',
+    description: 'Started the learning journey',
+    icon: '🚀',
+    threshold: 0
+  },
+  {
+    id: 'basics',
+    name: 'Basics Mastered',
+    description: 'Completed the introduction and history sections',
+    icon: '📚',
+    threshold: 25
+  },
+  {
+    id: 'halfway',
+    name: 'Halfway There',
+    description: 'Completed 50% of the tutorial',
+    icon: '🏃',
+    threshold: 50
+  },
+  {
+    id: 'explorer',
+    name: 'LGBTQAI+ Explorer',
+    description: 'Completed 75% of the tutorial',
+    icon: '🔍',
+    threshold: 75
+  },
+  {
+    id: 'champion',
+    name: 'Ally Champion',
+    description: 'Completed the entire tutorial',
+    icon: '🏆',
+    threshold: 100
+  },
+];
+
 const ProfileCompletion = () => {
   const theme = useTheme();
-  const { 
-    sections, 
-    getOverallProgress, 
-    getSectionCompletion, 
-    resetProgress 
+  const {
+    sections,
+    getOverallProgress,
+    getSectionCompletion,
+    resetProgress
   } = useProgress();
-  
+
   const [openDialog, setOpenDialog] = useState(false);
-  
+
   const overallProgress = getOverallProgress();
-  
-  // Sample badges for achievements
-  const badges = [
-    { 
-      id: 'started', 
-      name: 'First Steps', 
-      description: 'Started the learning journey', 
-      icon: '🚀', 
-      threshold: 0 
-    },
-    { 
-      id: 'basics', 
-      name: 'Basics Mastered', 
-      description: 'Completed the introduction and history sections', 
-      icon: '📚', 
-      threshold: 25 
-    },
-    { 
-      id: 'halfway', 
-      name: 'Halfway There', 
-      description: 'Completed 50% of the tutorial', 
-      icon: '🏃', 
-      threshold: 50 
-    },
-    { 
-      id: 'explorer', 
-      name: 'LGBTQAI+ Explorer', 
-      description: 'Completed 75% of the tutorial', 
-      icon: '🔍', 
-      threshold: 75 
-    },
-    { 
-      id: 'champion', 
-      name: 'Ally Champion', 
-      description: 'Completed the entire tutorial', 
-      icon: '🏆', 
-      threshold: 100 
-    },
-  ];
-  
+
+
+
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };
-  
+
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
-  
+
   const handleReset = () => {
     resetProgress();
     setOpenDialog(false);
   };
-  
+
   return (
     <>
       <ProfileCard>
@@ -171,7 +172,7 @@ const ProfileCompletion = () => {
             </Typography>
           </ProfileAvatar>
         </ProfileHeader>
-        
+
         <CardContent sx={{ pt: 7 }}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
@@ -201,21 +202,21 @@ const ProfileCompletion = () => {
                       justifyContent: 'center',
                     }}
                   >
-                    <EmojiEventsIcon 
-                      color="primary" 
-                      fontSize="large" 
+                    <EmojiEventsIcon
+                      color="primary"
+                      fontSize="large"
                       sx={{ opacity: overallProgress >= 100 ? 1 : 0.5 }}
                     />
                   </Box>
                 </Box>
                 <Typography variant="h6">Overall Progress</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {overallProgress >= 100 
-                    ? 'Congratulations on completing the tutorial!' 
+                  {overallProgress >= 100
+                    ? 'Congratulations on completing the tutorial!'
                     : `${Math.floor(overallProgress)}% Complete`}
                 </Typography>
               </ProgressContainer>
-              
+
               <BadgeContainer>
                 {badges.map((badge) => (
                   <Badge key={badge.id} unlocked={overallProgress >= badge.threshold ? 1 : 0}>
@@ -234,12 +235,12 @@ const ProfileCompletion = () => {
                 ))}
               </BadgeContainer>
             </Grid>
-            
+
             <Grid item xs={12} md={6}>
               <Typography variant="h6" gutterBottom>
                 Section Progress
               </Typography>
-              
+
               {sections.map((section) => (
                 <ProgressIndicator
                   key={section.id}
@@ -247,9 +248,9 @@ const ProfileCompletion = () => {
                   value={getSectionCompletion(section.id)}
                 />
               ))}
-              
+
               <Divider sx={{ my: 2 }} />
-              
+
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                   component={RouterLink}
@@ -273,8 +274,7 @@ const ProfileCompletion = () => {
           </Grid>
         </CardContent>
       </ProfileCard>
-      
-      {/* Reset Confirmation Dialog */}
+
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Reset Progress?</DialogTitle>
         <DialogContent>

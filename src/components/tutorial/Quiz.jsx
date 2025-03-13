@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { 
-  Box, Typography, Radio, RadioGroup, FormControlLabel, FormControl, 
+import {
+  Box, Typography, Radio, RadioGroup, FormControlLabel, FormControl,
   Button, Paper, Stepper, Step, StepLabel, Alert, Card
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -29,11 +29,11 @@ const ResultBox = styled(Box)(({ theme, correct }) => ({
   marginBottom: theme.spacing(2),
   display: 'flex',
   alignItems: 'center',
-  backgroundColor: correct 
-    ? theme.palette.tertiary.light 
+  backgroundColor: correct
+    ? theme.palette.tertiary.light
     : theme.palette.accent1.light,
-  color: correct 
-    ? theme.palette.tertiary.dark 
+  color: correct
+    ? theme.palette.tertiary.dark
     : theme.palette.accent1.dark,
 }));
 
@@ -60,25 +60,25 @@ const Option = styled(FormControlLabel)(({ theme, isSelected, isCorrect, isWrong
   },
 }));
 
-const Quiz = ({ questions, onComplete, sectionId }) => {
+const Quiz = ({ questions, onComplete }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showFeedback, setShowFeedback] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
-  
+
   const currentQuestion = questions[activeStep];
-  
+
   const handleAnswerSelect = (event) => {
     setSelectedAnswers({
       ...selectedAnswers,
       [activeStep]: event.target.value
     });
   };
-  
+
   const handleCheck = () => {
     setShowFeedback(true);
   };
-  
+
   const handleNext = () => {
     setShowFeedback(false);
     if (activeStep === questions.length - 1) {
@@ -90,60 +90,60 @@ const Quiz = ({ questions, onComplete, sectionId }) => {
       setActiveStep(prevStep => prevStep + 1);
     }
   };
-  
+
   const calculateScore = () => {
     let correctAnswers = 0;
-    
+
     questions.forEach((question, index) => {
       if (selectedAnswers[index] === question.correctAnswer) {
         correctAnswers++;
       }
     });
-    
+
     return (correctAnswers / questions.length) * 100;
   };
-  
+
   const isAnswerSelected = selectedAnswers[activeStep] !== undefined;
   const isAnswerCorrect = selectedAnswers[activeStep] === currentQuestion?.correctAnswer;
-  
+
   if (quizCompleted) {
     const score = calculateScore();
     const passed = score >= 70;
-    
+
     return (
       <QuizPaper>
         <Typography variant="h5" gutterBottom>
           Quiz Results
         </Typography>
-        
+
         <Box sx={{ textAlign: 'center', my: 4 }}>
           <Typography variant="h3" color={passed ? 'tertiary.main' : 'accent1.main'}>
             {Math.round(score)}%
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            You answered {Object.values(selectedAnswers).filter((answer, index) => 
+            You answered {Object.values(selectedAnswers).filter((answer, index) =>
               answer === questions[index].correctAnswer
             ).length} out of {questions.length} questions correctly.
           </Typography>
         </Box>
-        
+
         <Alert severity={passed ? "success" : "info"} sx={{ mb: 3 }}>
-          {passed 
-            ? "Great job! You've demonstrated a good understanding of this section." 
+          {passed
+            ? "Great job! You've demonstrated a good understanding of this section."
             : "Keep learning! Review the section content and try again."}
         </Alert>
-        
+
         <Typography variant="h6" gutterBottom>
           Question Review:
         </Typography>
-        
+
         {questions.map((question, index) => (
           <Box key={index} sx={{ mb: 2 }}>
             <Typography variant="subtitle1" fontWeight={600}>
               {index + 1}. {question.question}
             </Typography>
-            <Typography 
-              variant="body2" 
+            <Typography
+              variant="body2"
               color={selectedAnswers[index] === question.correctAnswer ? 'tertiary.main' : 'accent1.main'}
             >
               Your answer: {question.options[selectedAnswers[index]]}
@@ -158,13 +158,13 @@ const Quiz = ({ questions, onComplete, sectionId }) => {
       </QuizPaper>
     );
   }
-  
+
   return (
     <QuizPaper>
       <Typography variant="h5" gutterBottom>
         Knowledge Check
       </Typography>
-      
+
       <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }}>
         {questions.map((question, index) => (
           <Step key={index}>
@@ -172,7 +172,7 @@ const Quiz = ({ questions, onComplete, sectionId }) => {
           </Step>
         ))}
       </Stepper>
-      
+
       <AnimatePresence mode="wait">
         <motion.div
           key={activeStep}
@@ -185,7 +185,7 @@ const Quiz = ({ questions, onComplete, sectionId }) => {
             <Typography variant="h6" gutterBottom>
               {currentQuestion.question}
             </Typography>
-            
+
             <FormControl component="fieldset" fullWidth sx={{ mt: 2 }}>
               <RadioGroup
                 value={selectedAnswers[activeStep] || ''}
@@ -205,7 +205,7 @@ const Quiz = ({ questions, onComplete, sectionId }) => {
               </RadioGroup>
             </FormControl>
           </QuestionCard>
-          
+
           {showFeedback && (
             <ResultBox correct={isAnswerCorrect}>
               {isAnswerCorrect ? (
@@ -219,7 +219,7 @@ const Quiz = ({ questions, onComplete, sectionId }) => {
                 <>
                   <ErrorIcon sx={{ mr: 1 }} />
                   <Typography variant="body1">
-                    Not quite. The correct answer is "{currentQuestion.options[currentQuestion.correctAnswer]}". 
+                    Not quite. The correct answer is "{currentQuestion.options[currentQuestion.correctAnswer]}".
                     {currentQuestion.explanation}
                   </Typography>
                 </>
@@ -228,7 +228,7 @@ const Quiz = ({ questions, onComplete, sectionId }) => {
           )}
         </motion.div>
       </AnimatePresence>
-      
+
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
         <Button
           disabled={activeStep === 0}
@@ -240,7 +240,7 @@ const Quiz = ({ questions, onComplete, sectionId }) => {
         >
           Previous
         </Button>
-        
+
         {!showFeedback ? (
           <Button
             variant="contained"
