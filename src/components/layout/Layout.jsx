@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Container, styled } from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
+import ScrollToTop from '../ui/ScrollToTop';
 
 const Main = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -24,6 +25,7 @@ const ContentWrapper = styled(Box)(({ theme }) => ({
 const Layout = ({ children, maxWidth = 'lg' }) => {
   return (
     <Main>
+      <ScrollToTop />
       <Header />
       <ContentWrapper>
         <Container maxWidth={maxWidth} sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
