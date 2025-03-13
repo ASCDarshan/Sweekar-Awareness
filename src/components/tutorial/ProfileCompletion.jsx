@@ -22,7 +22,7 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 
 const ProfileHeader = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
-  background: theme.palette.gradients.primary,
+  background: theme.palette.gradients?.primary,
   color: theme.palette.primary.contrastText,
   borderTopLeftRadius: theme.shape.borderRadius,
   borderTopRightRadius: theme.shape.borderRadius,

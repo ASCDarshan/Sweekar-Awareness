@@ -12,6 +12,9 @@ import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import GavelIcon from '@mui/icons-material/Gavel';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import GroupsIcon from '@mui/icons-material/Groups';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SupportIcon from '@mui/icons-material/Support';
 import SchoolIcon from '@mui/icons-material/School';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
@@ -65,7 +68,9 @@ const navigationItems = [
   { text: 'Legal', icon: <GavelIcon />, path: '/legal' },
   { text: 'Challenges', icon: <PsychologyIcon />, path: '/challenges' },
   { text: 'Progress', icon: <SchoolIcon />, path: '/progress' },
-  { text: 'Resources', icon: <SupportIcon />, path: '/resources' },
+  { text: 'Resources', icon: <LibraryBooksIcon />, path: '/resources' },
+  { text: 'Social', icon: <GroupsIcon />, path: '/social' },
+  { text: 'Glossary', icon: <MenuBookIcon />, path: '/glossary' },
 ];
 
 const Header = () => {

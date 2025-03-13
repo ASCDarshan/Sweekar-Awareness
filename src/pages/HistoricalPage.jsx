@@ -12,7 +12,6 @@ import {
 } from "@mui/lab";
 import { useParams, Navigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-
 import SectionTemplate from "../components/sections/SectionTemplate";
 import { historicalData } from "../data";
 
@@ -63,6 +62,10 @@ const subsections = [
 
 const HistoricalPage = () => {
   const { subsectionId } = useParams();
+
+  if (!subsectionId) {
+    return <Navigate to="/history/ancient" />;
+  }
 
   const activePeriod = historicalData.periods.find(
     (period) => period.id === subsectionId
