@@ -17,7 +17,6 @@ import SchoolIcon from '@mui/icons-material/School';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { useProgress } from '../../contexts/ProgressContext';
 
-// Styled components
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: theme.palette.background.paper,
   color: theme.palette.text.primary,
@@ -59,7 +58,6 @@ const ProgressIndicator = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-// Main navigation items
 const navigationItems = [
   { text: 'Home', icon: <HomeIcon />, path: '/' },
   { text: 'History', icon: <HistoryEduIcon />, path: '/history' },
@@ -95,7 +93,6 @@ const Header = () => {
     return false;
   };
 
-  // Mobile drawer content
   const drawerContent = (
     <Box
       sx={{ width: 280 }}
@@ -149,12 +146,10 @@ const Header = () => {
     <>
       <StyledAppBar position="sticky">
         <Toolbar>
-          {/* Logo */}
           <Logo variant="h6" component={RouterLink} to="/" sx={{ textDecoration: 'none' }}>
             LGBTQAI+ Awareness
           </Logo>
 
-          {/* Desktop Navigation */}
           {!isMobile && (
             <Box sx={{ display: 'flex', flexGrow: 1 }}>
               {navigationItems.map((item) => (
@@ -171,7 +166,6 @@ const Header = () => {
             </Box>
           )}
 
-          {/* Right side content - progress indicator */}
           <Box sx={{ display: 'flex', alignItems: 'center', ml: 'auto' }}>
             <Typography variant="body2" color="text.secondary" sx={{ mr: 1 }}>
               {Math.round(progress)}% Complete
@@ -189,7 +183,6 @@ const Header = () => {
               {Math.round(progress)}%
             </Avatar>
 
-            {/* Mobile Menu Button */}
             {isMobile && (
               <IconButton
                 color="inherit"
@@ -206,7 +199,6 @@ const Header = () => {
         <ProgressIndicator variant="determinate" value={progress} />
       </StyledAppBar>
 
-      {/* Mobile Navigation Drawer */}
       <Drawer
         anchor="right"
         open={drawerOpen}

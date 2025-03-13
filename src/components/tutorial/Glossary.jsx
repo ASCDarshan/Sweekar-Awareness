@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Box, Typography, TextField, InputAdornment, Card, CardContent, 
+  Box, Typography, TextField, InputAdornment, Card, CardContent,
   Tabs, Tab, Chip, Divider, Accordion, AccordionSummary,
   AccordionDetails, useTheme, alpha
 } from '@mui/material';
@@ -71,45 +71,37 @@ const Glossary = ({ terms }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedLetter, setSelectedLetter] = useState('all');
   const [filteredTerms, setFilteredTerms] = useState([]);
-  
-  // Extract all unique categories
+
   const categories = ['all', ...new Set(terms.map(term => term.category))];
-  
-  // All letters of the alphabet for tabs
+
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  
-  // Filter terms based on search, category, and letter
+
   useEffect(() => {
     let results = [...terms];
-    
-    // Filter by search query
+
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      results = results.filter(term => 
-        term.term.toLowerCase().includes(query) || 
+      results = results.filter(term =>
+        term.term.toLowerCase().includes(query) ||
         term.definition.toLowerCase().includes(query)
       );
     }
-    
-    // Filter by category
+
     if (selectedCategory !== 'all') {
       results = results.filter(term => term.category === selectedCategory);
     }
-    
-    // Filter by starting letter
+
     if (selectedLetter !== 'all') {
-      results = results.filter(term => 
+      results = results.filter(term =>
         term.term.charAt(0).toUpperCase() === selectedLetter
       );
     }
-    
-    // Sort alphabetically
+
     results.sort((a, b) => a.term.localeCompare(b.term));
-    
+
     setFilteredTerms(results);
   }, [searchQuery, selectedCategory, selectedLetter, terms]);
-  
-  // Group terms by first letter for better organization
+
   const groupedTerms = filteredTerms.reduce((acc, term) => {
     const firstLetter = term.term.charAt(0).toUpperCase();
     if (!acc[firstLetter]) {
@@ -118,17 +110,15 @@ const Glossary = ({ terms }) => {
     acc[firstLetter].push(term);
     return acc;
   }, {});
-  
-  // Handle alphabet tab change
+
   const handleLetterChange = (event, newValue) => {
     setSelectedLetter(newValue);
   };
-  
-  // Handle category filter change
+
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
-  
+
   return (
     <GlossaryContainer>
       <SearchField
@@ -145,7 +135,7 @@ const Glossary = ({ terms }) => {
           ),
         }}
       />
-      
+
       <CategoryList>
         {categories.map(category => (
           <CategoryChip
@@ -157,7 +147,7 @@ const Glossary = ({ terms }) => {
           />
         ))}
       </CategoryList>
-      
+
       <Tabs
         value={selectedLetter}
         onChange={handleLetterChange}
@@ -167,15 +157,15 @@ const Glossary = ({ terms }) => {
       >
         <AlphabetTab label="All" value="all" />
         {alphabet.map(letter => (
-          <AlphabetTab 
-            key={letter} 
-            label={letter} 
+          <AlphabetTab
+            key={letter}
+            label={letter}
             value={letter}
             disabled={!Object.keys(groupedTerms).includes(letter)}
           />
         ))}
       </Tabs>
-      
+
       {filteredTerms.length === 0 ? (
         <Typography variant="body1" color="text.secondary" align="center" sx={{ py: 4 }}>
           No terms found matching your filters.
@@ -190,10 +180,10 @@ const Glossary = ({ terms }) => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  mb: 1, 
+              <Typography
+                variant="h6"
+                sx={{
+                  mb: 1,
                   mt: 3,
                   color: theme.palette.primary.main,
                   borderBottom: `2px solid ${theme.palette.primary.light}`,
@@ -203,7 +193,7 @@ const Glossary = ({ terms }) => {
               >
                 {letter}
               </Typography>
-              
+
               {letterTerms.map((term, index) => (
                 <TermCard key={`${term.term}-${index}`}>
                   <TermAccordion>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { 
-  Card, CardContent, Typography, Box, 
-  Chip, Collapse, IconButton, Link, 
-  Divider, Button, useTheme 
+import {
+  Card, CardContent, Typography, Box,
+  Chip, Collapse, IconButton, Link,
+  Divider, Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -39,7 +39,7 @@ const ServiceChip = styled(Chip)(({ theme }) => ({
   },
 }));
 
-const ExpandButton = styled(IconButton)(({ theme, expanded }) => ({
+const ExpandButton = styled(IconButton)(({ expanded }) => ({
   transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
   transition: 'transform 0.2s',
 }));
@@ -55,13 +55,12 @@ const ContactItem = styled(Box)(({ theme }) => ({
 }));
 
 const ResourceCard = ({ resource, type = 'organization' }) => {
-  const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-  
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  
+
   return (
     <ResourceCardContainer>
       <CardHeader>
@@ -85,14 +84,14 @@ const ResourceCard = ({ resource, type = 'organization' }) => {
           <ExpandMoreIcon />
         </ExpandButton>
       </CardHeader>
-      
+
       <Divider />
-      
+
       <CardContent>
         <Typography variant="body2" paragraph>
           {resource.description}
         </Typography>
-        
+
         {type === 'organization' && resource.services && (
           <Box sx={{ mb: 2 }}>
             <Typography variant="subtitle2" gutterBottom>
@@ -105,7 +104,7 @@ const ResourceCard = ({ resource, type = 'organization' }) => {
             </Box>
           </Box>
         )}
-        
+
         {type === 'helpline' && resource.hours && (
           <ContactItem>
             <AccessTimeIcon fontSize="small" />
@@ -114,15 +113,15 @@ const ResourceCard = ({ resource, type = 'organization' }) => {
             </Typography>
           </ContactItem>
         )}
-        
+
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <Box sx={{ mt: 2 }}>
             <Divider sx={{ mb: 2 }} />
-            
+
             <Typography variant="subtitle2" gutterBottom>
               Contact Information:
             </Typography>
-            
+
             {resource.contact && (
               <>
                 {resource.contact.phone && (
@@ -133,7 +132,7 @@ const ResourceCard = ({ resource, type = 'organization' }) => {
                     </Typography>
                   </ContactItem>
                 )}
-                
+
                 {resource.contact.email && (
                   <ContactItem>
                     <EmailIcon fontSize="small" />
@@ -144,14 +143,14 @@ const ResourceCard = ({ resource, type = 'organization' }) => {
                     </Typography>
                   </ContactItem>
                 )}
-                
+
                 {resource.contact.website && (
                   <ContactItem>
                     <LanguageIcon fontSize="small" />
                     <Typography variant="body2">
-                      <Link 
-                        href={resource.contact.website} 
-                        target="_blank" 
+                      <Link
+                        href={resource.contact.website}
+                        target="_blank"
                         rel="noopener noreferrer"
                         color="inherit"
                       >
@@ -160,7 +159,7 @@ const ResourceCard = ({ resource, type = 'organization' }) => {
                     </Typography>
                   </ContactItem>
                 )}
-                
+
                 {type === 'helpline' && resource.contact && (
                   <ContactItem>
                     <LocalPhoneIcon fontSize="small" />
@@ -169,8 +168,7 @@ const ResourceCard = ({ resource, type = 'organization' }) => {
                     </Typography>
                   </ContactItem>
                 )}
-                
-                {/* Button for online resources */}
+
                 {type === 'online' && resource.website && (
                   <Button
                     variant="outlined"
