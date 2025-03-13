@@ -7,10 +7,31 @@ import {
   CardContent,
   useTheme,
 } from "@mui/material";
-
+import { motion, AnimatePresence } from 'framer-motion';
 import SectionHeader from "../components/ui/SectionHeader";
 import ProfileCompletion from "../components/tutorial/ProfileCompletion";
 import { useProgress } from "../contexts/ProgressContext";
+
+const getSubsectionDescription = (section) => {
+  switch (section.id) {
+    case "introduction":
+      return "Get familiar with the tutorial structure and understand the learning objectives.";
+    case "historical":
+      return "Explore the rich history of gender and sexual diversity in India from ancient times to modern activism.";
+    case "identities":
+      return "Learn about different sexual orientations, gender identities, and the spectrum of human diversity.";
+    case "legal":
+      return "Understand the legal landscape including landmark court cases and current challenges for LGBTQAI+ rights in India.";
+    case "challenges":
+      return "Examine the social stigma, discrimination, mental health challenges, and other issues faced by the community.";
+    case "progress":
+      return "Discover the visibility, representation, and positive developments for the LGBTQAI+ community in recent years.";
+    case "resources":
+      return "Access support organizations, helplines, and resources available for the LGBTQAI+ community and allies.";
+    default:
+      return "Explore this section to learn more about LGBTQAI+ awareness.";
+  }
+};
 
 const ProgressPage = () => {
   const theme = useTheme();
@@ -99,25 +120,5 @@ const ProgressPage = () => {
   );
 };
 
-const getSubsectionDescription = (section) => {
-  switch (section.id) {
-    case "introduction":
-      return "Get familiar with the tutorial structure and understand the learning objectives.";
-    case "historical":
-      return "Explore the rich history of gender and sexual diversity in India from ancient times to modern activism.";
-    case "identities":
-      return "Learn about different sexual orientations, gender identities, and the spectrum of human diversity.";
-    case "legal":
-      return "Understand the legal landscape including landmark court cases and current challenges for LGBTQAI+ rights in India.";
-    case "challenges":
-      return "Examine the social stigma, discrimination, mental health challenges, and other issues faced by the community.";
-    case "progress":
-      return "Discover the visibility, representation, and positive developments for the LGBTQAI+ community in recent years.";
-    case "resources":
-      return "Access support organizations, helplines, and resources available for the LGBTQAI+ community and allies.";
-    default:
-      return "Explore this section to learn more about LGBTQAI+ awareness.";
-  }
-};
 
 export default ProgressPage;

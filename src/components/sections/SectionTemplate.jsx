@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Box, Typography, Paper, Button, Divider,
   Grid, Card, CardContent,

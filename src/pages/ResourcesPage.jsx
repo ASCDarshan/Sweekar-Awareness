@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Typography,
@@ -42,12 +42,9 @@ const IntroBox = styled(Paper)(({ theme }) => ({
 }));
 
 const ResourcesPage = () => {
-  const theme = useTheme();
   const [tab, setTab] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-  // const { markAsCompleted } = useProgress();
 
-  // Get resources data
   const {
     organizations,
     helplines,
@@ -55,17 +52,6 @@ const ResourcesPage = () => {
     educational_resources,
     legal_support,
   } = resourcesData;
-
-  // Mark section as viewed
-  // useEffect(() => {
-  //   markAsCompleted('resources', 'organizations');
-
-  //   // Mark other subsections based on tab
-  //   if (tab === 1) markAsCompleted('resources', 'helplines');
-  //   if (tab === 2) markAsCompleted('resources', 'online_resources');
-  //   if (tab === 3) markAsCompleted('resources', 'educational_resources');
-  //   if (tab === 4) markAsCompleted('resources', 'legal_support');
-  // }, [tab, markAsCompleted]);
 
   const handleTabChange = (event, newValue) => {
     setTab(newValue);
@@ -147,7 +133,7 @@ const ResourcesPage = () => {
         }}
       />
 
-      <Paper sx={{ borderRadius: theme.shape.borderRadius }}>
+      <Paper >
         <Tabs
           value={tab}
           onChange={handleTabChange}
